@@ -1,0 +1,30 @@
+I created a Digital Ocean server running mongo 3.2.7 on Ubuntu 14.04.
+
+I installed git and cloned `jrnold/scraper`:
+```console
+$ apt-get install git
+$ git clone https://github.com/jrnold/scraper.git
+$ cd scraper
+$ git checkout kenya
+```
+
+I copied the config file, but did not edit any settings
+```console
+$ cp default_config.ini config.ini
+```
+
+It would be more clean to use a virtualenv but this is all I'm running on this
+server, and installing via pip requires external libraries and building some
+parts of the package from source.
+I also removed the version specific info from `requirements.txt`.
+```console
+$ apt-get install python-lxml python-pil python-yaml \
+  python-pymongo python-beautifulsoup python-nltk
+$ pip install -r requirements.txt
+```
+
+To run this daily, I used `crontab` instead of the `scraper_schedule.py`.
+I added the following line to the `crontab`:
+```
+@daily python /root/scraper/scraper.py
+```
