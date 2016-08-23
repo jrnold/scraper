@@ -26,5 +26,5 @@ $ pip install -r requirements.txt
 To run this daily, I used `crontab` instead of the `scraper_schedule.py`.
 I added the following line to the `crontab`:
 ```
-@daily python /root/scraper/scraper.py
+@daily python cd /root/scraper && /root/scraper/scraper.py
 ```
